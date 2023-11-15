@@ -1,5 +1,8 @@
-﻿Quantity,Name,Cost,Price
-2,Apple,2,6
-3,Banana,3,6
-20,Orange,4,6
-10,Pineapple,5,6
+﻿Quantity,Name,Initial(฿),Sell(฿)
+10,Mouse,120,200
+30,Monitor,300,700
+20,Keyboard,200,650
+20,Headphone,125,300
+15,Adapter,100,150
+10,Gaming Chair,500,1000
+30,Speaker,170,300
