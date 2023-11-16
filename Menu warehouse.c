@@ -41,6 +41,7 @@ int menuwarehouse() {
     }
 
     fclose(inputFile);
+    printf("Select your option\n(1) Update stock\n(2) Show stock\n(3) Net profit\n(4) Exit\n");
 
     // Print alert
     for (int i = 0; i < numRecords; i++) {
@@ -50,43 +51,34 @@ int menuwarehouse() {
     }
 
     // Choose option
-    char a;
-    int inputResult;
-
-    printf("Choose your option\n");
-    printf("(1) Update stock\n(2) Show stock\n(3) Net profit\n(4) Exit\n");
+     int a, inputResult;
 
     while (1) {
-        printf("Please input your option:");
-        inputResult = scanf(" %c", &a);
-
-        if (inputResult == 1 && (a == '1' || a == '2' || a == '3' || a == '4')) {
+        printf("Please input your option: ");
+        inputResult = scanf(" %d", &a);
+        if (inputResult == 1 && (a == 1 || a == 2 || a == 3 || a == 4)) {
             break; // Valid input, exit the loop
         } else {
-            printf("Please input a valid number (1, 2, 3, or 4)\n");
-            // Clear the input buffer
-            int c;
-            while ((c = getchar()) != '\n' && c != EOF);
+            printf("Please input a valid number (1, 2, 3, or 4)\n");  // Clear the input buffer
+            while (getchar() != '\n');   // Keep reading characters until a newline is encountered
         }
     }
-
-    printf("Selected option: %c\n", a);
+    printf("Selected option: %d\n", a);
 
     // Perform action based on the selected option
-    if (a == '1') {
+    if (a == 1) {
         printf("Update stock\n");
-    } else if (a == '2') {
+    } else if (a == 2) {
         // Show stock
         printf("            ==Welcome to Warehouse menu==\n");
         printf("Code               Quantity         name               initial         sell\n");
         for (int i = 0; i < numRecords; i++) {
             printf("%-20s%-15.2f%-20s%-15.2f%-15.2f\n", selling[i].code, selling[i].quantity, selling[i].name, selling[i].initial, selling[i].sell);
         }
-    } else if (a == '3') {
+    } else if (a == 3) {
         printf("Net profit\n");
-    } else if (a == '4') {
+    } else if (a == 4) {
         printf("Exit\n");
     }
-
     return 0;
 }
