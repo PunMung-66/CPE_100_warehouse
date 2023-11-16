@@ -80,5 +80,6 @@ int menuwarehouse() {
     } else if (a == 4) {
         printf("Exit\n");
     }
+
     return 0;
 }
