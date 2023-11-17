@@ -1,4 +1,4 @@
-﻿Code,Unit,Name,Initial(฿),Sell(฿)
+﻿Code,Unit,Name,Cost(฿),Sell(฿)
 M001,10,Mouse,120,200
 M101,30,Monitor,300,700
 K001,20,Keyboard,200,650

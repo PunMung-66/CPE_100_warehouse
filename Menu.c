@@ -1,25 +1,8 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
+#include "header.h"
 
-int cashier()
-{
-    char option;
-    int option_out;
-    printf("\n\n=== Welcome to (Cashier Menu) ===\n\n");
-    printf("(1) Add order\n");
-    printf("(2) Edit order\n");// can Clear specific order in Edit.
-    printf("(3) Cancel order\n");// Cancel order
-    printf("(4) Save order\n");
-    printf("(5) Back(Main Menu) \n\n");
-    printf("Choose your option:\n\n");
-    printf("CPE_100:\\Menu\\Cashier> ");
-    scanf(" %c", &option); //  add space for not read above newline.
-    if (option < '1' || option > '5')
-        option = '0';
-    option_out = option - '0';
-    return(option_out);
-}
+// void add_()
+// {
+// }
 
 void cashier_system()
 {
@@ -33,10 +16,16 @@ void cashier_system()
             printf("\n** Please try again, your option is out of defined. **\n\n");
             cash_option = cashier();
         }
-        if ( cash_option == 1 ){printf("\n[Add option]");}
-        else if ( cash_option == 2){printf("\n[Edit option]");}
-        else if ( cash_option == 3){printf("\n[Clear option]");}
-        else if ( cash_option == 4){printf("\n[Calculate total]");}
+        if ( cash_option == 1 )
+        {
+            system("cls");
+            printf("\n[Add option]\n\n");
+            ShowStock();
+        }
+        else if ( cash_option == 2){system("cls");printf("\n[Edit option]\n");}
+        else if ( cash_option == 3){system("cls");printf("\n[Clear option]\n");}
+        else if ( cash_option == 4){system("cls");printf("\n[Calculate total]\n");}
+        else if ( cash_option == 5){break;}
         cash_option = cashier();
     }
     system("cls");
@@ -62,19 +51,20 @@ int welcome()
 
 void welcome_system()
 {
-    system("cls");
+    //system("cls");
     int wel_option = welcome();
     while (wel_option != 3)
     {
-        system("cls");
+        //system("cls");
         while ( wel_option == 0)
         {
             system("cls");
-            printf("\n** Please try again, your option is out of defined. **\n\n");
+            printf("\n** Please try again, your option is out of defined. **\n");
             wel_option = welcome();
         }
         if ( wel_option == 1 ){system("cls");printf("\n>>> Cashier Menu");cashier_system();}
         else if ( wel_option == 2){system("cls");printf("\n>>> Warehouse Menu");}
+        else if ( wel_option == 3){exit(0);}
         wel_option = welcome();
     }
 }
