@@ -1,0 +1,7 @@
+List Achieve:
+- main Menu
+- Cashier Menu
+
+Useful:
+-clear struct (memset)
+https://stackoverflow.com/questions/20325126/how-to-properly-clear-an-array-of-struct
