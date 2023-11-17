@@ -8,7 +8,7 @@ int ShowStock() {
         return 1;
     }
     char header[100];
-    char c;
+    int a;
     fgets(header, sizeof(header), file);
 
     printf("%-5s%-5s%-15s%-10s%-10s\n", "Code", "Unit", "Name", "Initial", "Sell");
@@ -22,13 +22,10 @@ int ShowStock() {
     }
 
     fclose(file);
-    while(c!='Y'){
-    printf("Do you want to go back to menu??(Y/N)");
-    scanf(" %c",&c);
-    if(c=='Y'||c=='y'){
-        printf("hoolay");//menu function here :D
-        break;
-    }else{}
+    printf("Press 1 if you want to return:");
+    scanf("%d",&a);
+    if(a==1){
+        return 0;
     }
 }
 int main(){
