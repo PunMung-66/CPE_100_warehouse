@@ -30,28 +30,6 @@ int ShowStocks() {
     return 0;
 }
 
-void combine_same_product_in_basket()
-{
-    FILE *basketFile = fopen("basket.txt", "r");
-    FILE *Tempfile = fopen("temp.txt", "w");
-    if (basketFile == NULL || Tempfile == NULL) {
-        printf("Error opening basket file.\n");
-        return;
-    }
-    char *line[100];
-    int index = 0;
-    while (fgets(line[index], sizeof(line), basketFile) != NULL) {
-        //printf("%s", line[index]);
-        index++;
-    }
-    while (index >= 0)
-    {
-        index--;
-        printf("%s", line[index]);
-    }
-
-}
-
 int addToBasket(const char *code, char *name,int quantity) 
 {
     FILE* basketFile = fopen("basket.txt", "a");
@@ -59,10 +37,8 @@ int addToBasket(const char *code, char *name,int quantity)
         printf("Error opening basket file.\n");
         return 0;
     }
-
     // Write the product code, name, and quantity to the basket file
     fprintf(basketFile, "%s - %s - %d\n", code, name, quantity);
-
     fclose(basketFile);
     return(1);
 }

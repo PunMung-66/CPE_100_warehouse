@@ -30,34 +30,35 @@ int ShowStocks_cashier() {
     return 0;
 }
 
-int addToBasket(const char* code, int quantity) 
+int addToBasket(const char *code, char *name, int quantity) 
 {
     FILE* basketFile = fopen("basket.txt", "a");
-    if (basketFile == NULL) {
-        printf("Error opening basket file.\n");
+    if (basketFile == NULL) 
+    {
         return 0;
+        printf("Error opening basket file.\n");
     }
-
-    // Write the product code, name, and quantity to the basket file
-    fprintf(basketFile, "%s - %d\n", code, quantity);
-
+    fprintf(basketFile, "%s - %s - %d\n", code, name, quantity);
     fclose(basketFile);
     return(1);
 }
 
 void showBasket() 
 {
-    FILE* basketFile = fopen("basket.txt", "r");
+    char *token;
+    FILE *basketFile = fopen("basket.txt", "r");
     if (basketFile == NULL) {
         printf("Error opening basket file.\n");
-        return;
     }
-    printf("Your basket now:\n");
+    printf("Your basket now:\n\n");
+    printf("---------------------------------\n");
     char line[100];
-    while (fgets(line, sizeof(line), basketFile) != NULL) {
-        printf("%s", line);
+    while (fgets(line, sizeof(line), basketFile) != NULL) 
+    {
+        token = strtok(line, "\n");
+        printf("|\t%s\t\n", token);
     }
-
+    printf("---------------------------------\n");
     fclose(basketFile);
 }
 
@@ -67,7 +68,7 @@ void addToBasket_system()
     int quantity_i, add_finished = 0;
     //system("cls");
     ShowStocks_cashier();
-    printf("Enter product (Code) to add in basket: ");
+    printf("Enter product code to add in basket: ");
     scanf("%s", &code_i);
     printf("Enter the number of units to add: ");
     scanf("%d", &quantity_i);
@@ -77,6 +78,11 @@ void addToBasket_system()
     {
         printf("Error opening the file.\n");
     } 
+    else if (quantity_i <= 0)
+    {
+        system("cls");
+        printf("\n(* Your quantity is not valid !!!! *)\n");
+    }
     else
     {
         char header[100];
@@ -88,18 +94,28 @@ void addToBasket_system()
         while (fscanf(file, "%5[^,],%d,%20[^,],%f,%f\n", code, &unit, name, &cost, &sell) == 5) 
         {
             if (strcmp(code, code_i) == 0)
-                add_finished = addToBasket(code, quantity_i);
+            {
+                if (unit < quantity_i || unit == 0)
+                {
+                    system("cls");
+                    add_finished = - 1;
+                    break;
+                }
+                else
+                {
+                    add_finished = addToBasket(code, name, quantity_i);
+                    break;
+                }
+            }
         }
+        system("cls");
         if (add_finished == 0)
-        {
-             system("cls");
-            printf("\n(* Your product not found !!!! *)\n");
-        }
+            printf("\n(* Your product not found !!!! *)\n\n");
+        else if (add_finished == -1)
+            printf("\n(* Sorry our product is not enough !!!! *)\n");
         else
         {
-            system("cls");
-            printf("\n(* Your product has been added. *)\n");
-            showBasket();
+            printf("\n(* Your product has been added. *)\n\n");
         }
         fclose(file);
     }

@@ -1,7 +1,6 @@
 #include "add_show.h"
 #include "cashier_UI.h"
-
-
+#include "combinesame.h"
 
 void cashier_system()
 {
@@ -20,6 +19,8 @@ void cashier_system()
             system("cls");
             printf("\n[Add option]\n\n");
             addToBasket_system();
+            combine_same_product_in_basket();
+            showBasket();
         }
         else if ( cash_option == 2){system("cls");printf("\n[Edit option]\n");}
         else if ( cash_option == 3){system("cls");printf("\n[Clear option]\n");}

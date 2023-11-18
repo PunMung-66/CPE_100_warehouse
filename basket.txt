@@ -1,9 +1,0 @@
-A001 - Adapter - 3
-K001 - Keyboard - 4
-A001 - Adapter - 2
-C001 - Gaming Chair - 7
-K001 - Keyboard - -1
-M001 - Mouse - 10
-M001 - Mouse - 10
-M001 - Mouse - 10
-S001 - Speaker - 2
