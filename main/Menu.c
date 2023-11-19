@@ -1,9 +1,10 @@
-#include "add_show.h"
+#include "add_clearB.h"
 #include "cashier_UI.h"
-#include "combinesame.h"
+#include "combineB.h"
 
 void cashier_system()
 {
+    showBasket();
     int cash_option = cashier();
     while (cash_option != 5)
     {
@@ -17,15 +18,21 @@ void cashier_system()
         if ( cash_option == 1 )
         {
             system("cls");
-            printf("\n[Add option]\n\n");
+            //printf("\n[Add option]\n\n");
             addToBasket_system();
-            combine_same_product_in_basket();
-            showBasket();
+            combine_basket();
         }
         else if ( cash_option == 2){system("cls");printf("\n[Edit option]\n");}
-        else if ( cash_option == 3){system("cls");printf("\n[Clear option]\n");}
+        else if ( cash_option == 3)
+        {
+            system("cls");
+            //printf("\n[Clear option]\n");
+            clear_basket();
+            combine_basket();
+            }
         else if ( cash_option == 4){system("cls");printf("\n[Calculate total]\n");}
         else if ( cash_option == 5){break;}
+        showBasket();
         cash_option = cashier();
     }
     system("cls");
@@ -62,8 +69,8 @@ void welcome_system()
             printf("\n** Please try again, your option is out of defined. **\n");
             wel_option = welcome();
         }
-        if ( wel_option == 1 ){system("cls");printf("\n>>> Cashier Menu\n");cashier_system();}
-        else if ( wel_option == 2){system("cls");printf("\n>>> Warehouse Menu\n");}
+        if ( wel_option == 1 ){system("cls");printf("\n>>> Cashier Menu\n\n");cashier_system();}
+        else if ( wel_option == 2){system("cls");printf("\n>>> Warehouse Menu\n\n");}
         else if ( wel_option == 3){exit(0);}
         wel_option = welcome();
     }

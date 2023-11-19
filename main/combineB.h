@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void combine_same_product_in_basket()
+void combine_basket()
 {
     FILE *basketFile = fopen("basket.txt", "r");
     FILE *Tempfile = fopen("temp.txt", "w");

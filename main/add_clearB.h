@@ -1,34 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-int ShowStocks_cashier() {
-    FILE *file = fopen("Database.csv", "r");
-
-    if (file == NULL) 
-    {
-        printf("Error opening the file.\n");
-        return 1;
-    } 
-    else 
-    {
-        char header[100];
-        int choice;
-        fgets(header, sizeof(header), file);
-        printf("%-*s%-*s%-*s%-*s\n", 10, "Code", 15, "Unit", 15, "Name", 15, "Sell");
-        char code[100];
-        int unit;
-        char name[100];
-        float cost, sell;
-        while (fscanf(file, "%5[^,],%d,%20[^,],%f,%f\n", code, &unit, name, &cost, &sell) == 5) {
-            printf("%-*s%-*d%-*s%-*.2f\n", 10, code, 15, unit, 15, name, 15, sell);
-        }
-        fclose(file);
-
-    }
-    printf("\n");
-    return 0;
-}
+#include "showBC.h"
 
 int addToBasket(const char *code, char *name, int quantity) 
 {
@@ -41,25 +14,6 @@ int addToBasket(const char *code, char *name, int quantity)
     fprintf(basketFile, "%s - %s - %d\n", code, name, quantity);
     fclose(basketFile);
     return(1);
-}
-
-void showBasket() 
-{
-    char *token;
-    FILE *basketFile = fopen("basket.txt", "r");
-    if (basketFile == NULL) {
-        printf("Error opening basket file.\n");
-    }
-    printf("Your basket now:\n\n");
-    printf("---------------------------------\n");
-    char line[100];
-    while (fgets(line, sizeof(line), basketFile) != NULL) 
-    {
-        token = strtok(line, "\n");
-        printf("|\t%s\t\n", token);
-    }
-    printf("---------------------------------\n");
-    fclose(basketFile);
 }
 
 void addToBasket_system()
@@ -119,4 +73,11 @@ void addToBasket_system()
         }
         fclose(file);
     }
+}
+
+void clear_basket()
+{
+    FILE *file = fopen("basket.txt", "w");
+    fclose(file);
+    printf("\n(* Your basket has been cleared. *)\n\n");
 }

@@ -2,6 +2,7 @@ List Achieve:
 - main Menu
 - Cashier Menu
 - Add product in basket
+- Clear basket
 
 Useful:
 -clear struct (memset)
