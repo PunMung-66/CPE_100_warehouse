@@ -43,8 +43,21 @@ void showBasket()
     while (fgets(line, sizeof(line), basketFile) != NULL) 
     {
         count++;
-        token = strtok(line, "\n");
-        printf("| %s \n", token);
+        printf("|");
+        int col = 0;
+        token = strtok(line, "-");
+        while (token)
+        {
+            if (col != 3)
+                printf(" %s ", token);
+            if (col == 2)
+                printf("\t\t");
+            if ( col == 1)
+                printf("\t");
+            col++;
+            token = strtok(NULL, "-");
+        }
+        printf("\n");
     }
     if (count == 0)
     {

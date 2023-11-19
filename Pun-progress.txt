@@ -3,6 +3,7 @@ List Achieve:
 - Cashier Menu
 - Add product in basket
 - Clear basket
+- Calculate total
 
 Useful:
 -clear struct (memset)
