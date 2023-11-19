@@ -1,8 +1,18 @@
 Task List
--
--
--
--
+Create Cost Calculations
+- Amount x Price For All Items In The Basket
+- Sum all of them
+- Show the total cost
 -
 -
 
+Save The Order
+- Create a file for the order / print in the data onto the existed-database.
+- Show the items added with the total price
+- 
+-
+
+Create Cancel Ordering Function
+- If type a certain keyword, functions and orders will be cancelled. Returning to the bucket list.
+-
+-
