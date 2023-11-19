@@ -1,6 +1,7 @@
 #include "add_clearB.h"
 #include "cashier_UI.h"
 #include "combineB.h"
+#include "edit_B.h"
 
 void cashier_system()
 {
@@ -19,11 +20,17 @@ void cashier_system()
         if ( cash_option == 1 )
         {
             system("cls");
-            //printf("\n[Add option]\n\n");
+            printf("\n[Add option]\n\n");
             addToBasket_system();
             combine_basket();
         }
-        else if ( cash_option == 2){system("cls");printf("\n[Edit option]\n");}
+        else if ( cash_option == 2)
+        {
+            system("cls");
+            printf("\n[Edit option]\n");
+            editToBasket_system();
+            combine_basket();
+            }
         else if ( cash_option == 3)
         {
             system("cls");

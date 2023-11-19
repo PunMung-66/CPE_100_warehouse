@@ -52,7 +52,7 @@ void combine_basket()
     for (int i = 0; i < index; i++)
     {
         if (unit[i] != 0)
-            fprintf(Tempfile, "%s-%s- %d - %.2lf - %.2lf\n", code[i], name[i], unit[i], cost[i], sell[i]);
+            fprintf(Tempfile, "%s-%s-%d-%.2lf-%.2lf\n", code[i], name[i], unit[i], cost[i], sell[i]);
     }
     printf("total cost: %.2lf Baht\n", total_cost);
     printf("total profit: %.2lf Baht\n\n", total_profit);

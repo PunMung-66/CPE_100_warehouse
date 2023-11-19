@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "showBC.h"
+#include "showC.h"
 
 int addToBasket(const char *code, char *name, int quantity, double cost, double sell) 
 {
@@ -11,7 +11,7 @@ int addToBasket(const char *code, char *name, int quantity, double cost, double 
         return 0;
         printf("Error opening basket file.\n");
     }
-    fprintf(basketFile, "%s - %s - %d - %.2lf - %.2lf\n", code, name, quantity, cost, sell);
+    fprintf(basketFile, "%s-%s-%d-%.2lf-%.2lf\n", code, name, quantity, cost, sell);
     fclose(basketFile);
     return(1);
 }
