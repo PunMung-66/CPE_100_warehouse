@@ -11,13 +11,17 @@
 
 int ShowStocks();
 void AddUnit();
+void AddNewProduct();
+void EditProduct();
 
 int UpdateStock() {
     int choice;
 
     do {
         printf("1. Add Unit\n");
-        printf("2. Exit\n");
+        printf("2. Add New Product\n");
+        printf("3. Edit\n");
+        printf("4. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         switch (choice) {
@@ -27,6 +31,14 @@ int UpdateStock() {
                 AddUnit();
                 break;
             case 2:
+                ShowStocks();
+                AddNewProduct();
+                break;
+            case 3:
+              ShowStocks();
+              EditProduct();
+                break;
+            case 4:
                 printf("Exiting program.\n");
                 break;
             default:
@@ -108,6 +120,107 @@ void AddUnit() {
 
     printf("Units added successfully.\n");
 }
+void AddNewProduct() {
+    char newCode[CODE_WIDTH];
+    int newUnit;
+    char newName[NAME_WIDTH];
+    float newInitial, newSell;
+
+    printf("Enter the new product code: ");
+    scanf("%s", newCode);
+
+    printf("Enter the number of units: ");
+    scanf("%d", &newUnit);
+
+    printf("Enter the product name: ");
+    scanf("%s", newName);
+
+    printf("Enter the initial price: ");
+    scanf("%f", &newInitial);
+
+    printf("Enter the sell price: ");
+    scanf("%f", &newSell);
+
+    FILE *file = fopen("Database.csv", "a");
+    if (file == NULL) {
+        printf("Error opening the file.\n");
+        return;
+    }
+
+
+    fprintf(file, "%s,%d,%s,%.2f,%.2f\n", newCode, newUnit, newName, newInitial, newSell);
+
+    fclose(file);
+
+    printf("New product added successfully.\n");
+}
+void EditProduct() {
+    char targetCode[CODE_WIDTH];
+    char newName[NAME_WIDTH];
+    int newUnit;
+    float newInitial, newSell;
+
+    printf("Enter the product code to edit: ");
+    scanf("%s", targetCode);
+
+    FILE *file = fopen("Database.csv", "r");
+    FILE *tempFile = fopen("temp.csv", "w");
+
+    if (file == NULL || tempFile == NULL) {
+        printf("Error opening files.\n");
+        return;
+    }
+
+    char header[BUFFER_SIZE];
+    fgets(header, sizeof(header), file);
+    fprintf(tempFile, "%s", header);
+
+    char code[CODE_WIDTH];
+    int unit;
+    char name[NAME_WIDTH];
+    float initial, sell;
+
+    int found = 0;
+
+    while (fscanf(file, "%5[^,],%d,%20[^,],%f,%f\n", code, &unit, name, &initial, &sell) == 5) {
+        if (strcmp(code, targetCode) == 0) {
+            printf("Current details for product %s:\n", targetCode);
+            printf("Name: %s\n", name);
+            printf("Enter new product name: ");
+            scanf("%s", newName);
+
+            printf("Enter new number of units: ");
+            scanf("%d", &newUnit);
+
+            printf("Enter new initial price: ");
+            scanf("%f", &newInitial);
+
+            printf("Enter new sell price: ");
+            scanf("%f", &newSell);
+
+            strcpy(name, newName);
+            unit = newUnit;
+            initial = newInitial;
+            sell = newSell;
+
+            found = 1;
+        }
+        fprintf(tempFile, "%s,%d,%s,%.2f,%.2f\n", code, unit, name, initial, sell);
+    }
+
+    fclose(file);
+    fclose(tempFile);
+
+    remove("Database.csv");
+    rename("temp.csv", "Database.csv");
+
+    if (found) {
+        printf("Product %s edited successfully.\n", targetCode);
+    } else {
+        printf("Product %s not found.\n", targetCode);
+    }
+}
+
 int main(){
   UpdateStock();
 }
