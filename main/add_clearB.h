@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "showBC.h"
 
-int addToBasket(const char *code, char *name, int quantity) 
+int addToBasket(const char *code, char *name, int quantity, double cost, double sell) 
 {
     FILE* basketFile = fopen("basket.txt", "a");
     if (basketFile == NULL) 
@@ -11,7 +11,7 @@ int addToBasket(const char *code, char *name, int quantity)
         return 0;
         printf("Error opening basket file.\n");
     }
-    fprintf(basketFile, "%s - %s - %d\n", code, name, quantity);
+    fprintf(basketFile, "%s - %s - %d - %.2lf - %.2lf\n", code, name, quantity, cost, sell);
     fclose(basketFile);
     return(1);
 }
@@ -57,7 +57,7 @@ void addToBasket_system()
                 }
                 else
                 {
-                    add_finished = addToBasket(code, name, quantity_i);
+                    add_finished = addToBasket(code, name, quantity_i, cost, sell);
                     break;
                 }
             }

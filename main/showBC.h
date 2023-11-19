@@ -44,7 +44,7 @@ void showBasket()
     {
         count++;
         token = strtok(line, "\n");
-        printf("|\t%s\t\n", token);
+        printf("| %s \n", token);
     }
     if (count == 0)
     {

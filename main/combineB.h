@@ -12,6 +12,7 @@ void combine_basket()
     }
     char line[50],  name[100][30], code[100][30];
     int unit[100];
+    double cost[100], sell[100], total_each[100] ,profit[100], total_cost = 0, total_profit = 0;
     int index = 0;
     while (fgets(line, sizeof(line), basketFile) != NULL)
     {
@@ -25,9 +26,15 @@ void combine_basket()
                 strcpy(name[index], token);
             else if (col == 2)
                 unit[index] = atoi(token);
+            else if (col == 3)
+                cost[index] = atof(token);
+            else if (col == 4)
+                sell[index] = atof(token);
             token = strtok(NULL, "-");
             col++;
         }
+        total_profit += (sell[index] - cost[index]) * unit[index];
+        total_cost += sell[index] * unit[index];
         index++;
     }
     for (int i = 0; i < index; i++)
@@ -45,8 +52,10 @@ void combine_basket()
     for (int i = 0; i < index; i++)
     {
         if (unit[i] != 0)
-            fprintf(Tempfile, "%s-%s- %d\n", code[i], name[i], unit[i]);
+            fprintf(Tempfile, "%s-%s- %d - %.2lf - %.2lf\n", code[i], name[i], unit[i], cost[i], sell[i]);
     }
+    printf("total cost: %.2lf Baht\n", total_cost);
+    printf("total profit: %.2lf Baht\n\n", total_profit);
     fclose(Tempfile);
     fclose(basketFile);
     remove("basket.txt");

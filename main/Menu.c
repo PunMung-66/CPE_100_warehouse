@@ -28,7 +28,7 @@ void cashier_system()
             system("cls");
             //printf("\n[Clear option]\n");
             clear_basket();
-            combine_basket();
+            //combine_basket();
             }
         else if ( cash_option == 4){system("cls");printf("\n[Calculate total]\n");}
         else if ( cash_option == 5){break;}
