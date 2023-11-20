@@ -7,7 +7,7 @@ int ShowStocks_cashier() {
 
     if (file == NULL) 
     {
-        printf("Error opening the file.\n");
+        //printf("Error opening the file.\n");
         return 1;
     } 
     else 

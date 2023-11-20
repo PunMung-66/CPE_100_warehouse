@@ -7,6 +7,10 @@ void combine_basket()
     FILE *basketFile = fopen("basket.txt", "r");
     FILE *Tempfile = fopen("temp.txt", "w");
     if (basketFile == NULL || Tempfile == NULL) {
+        fclose(basketFile);
+        fclose(Tempfile);
+        remove("basket.txt");
+        rename("temp.txt", "basket.txt");
         return;
         //printf("Error opening basket file.\n");
     }
@@ -56,8 +60,8 @@ void combine_basket()
     }
     printf("total cost: %.2lf Baht\n", total_cost);
     printf("total profit: %.2lf Baht\n\n", total_profit);
-    fclose(Tempfile);
     fclose(basketFile);
+    fclose(Tempfile);
     remove("basket.txt");
     rename("temp.txt", "basket.txt");
 }

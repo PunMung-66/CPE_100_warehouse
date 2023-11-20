@@ -104,7 +104,7 @@ int showBasket_edit()
     char *token, line[100];
     FILE *basketFile = fopen("basket.txt", "r");
     if (basketFile == NULL) {
-        printf("Error opening basket file.\n");
+        //printf("Error opening basket file.\n");
     }
     printf("Your basket now:\n\n");
     printf("---------------------------------\n");
