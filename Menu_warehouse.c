@@ -11,7 +11,7 @@ typedef struct {
 } product;
 
 int menuwarehouse() {
-    FILE *inputFile = fopen("Database.csv", "r");
+    FILE *inputFile = fopen("database.csv", "r");
     if (inputFile == NULL) {
         printf("Error opening the input CSV file\n");
         return 1;
@@ -81,5 +81,11 @@ int menuwarehouse() {
         printf("Exit\n");
     }
 
+    return 0;
+}
+
+int main()
+{
+    menuwarehouse();
     return 0;
 }
