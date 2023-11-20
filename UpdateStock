@@ -18,7 +18,7 @@ int UpdateStock() {
     int choice;
 
     do {
-        printf("1. Add Unit\n");
+        printf("1. Add Units\n");
         printf("2. Add New Product\n");
         printf("3. Edit\n");
         printf("4. Exit\n");
