@@ -65,7 +65,7 @@ int ShowStocks() {
     fgets(header, sizeof(header), file);
 
     printf("%-*s%-*s%-*s%-*s%-*s\n", CODE_WIDTH, "Code", UNIT_WIDTH, "Unit",
-           NAME_WIDTH, "Name", INITIAL_WIDTH, "Initial", SELL_WIDTH, "Sell");
+           NAME_WIDTH, "Name", INITIAL_WIDTH, "Cost", SELL_WIDTH, "Sell");
 
     char code[CODE_WIDTH];
     int unit;
