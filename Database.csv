@@ -1,8 +1,8 @@
 ﻿Code,Unit,Name,Initial(฿),Sell(฿)
-M001,1,Mouse,120,200
-M101,30,Monitor,300,700
-K001,20,Keyboard,200,650
-H001,20,Headphone,125,300
-A001,15,Adapter,100,150
-C001,10,Gaming Chair,500,1000
-S001,30,Speaker,170,300
+M001,10,Mouse,120.00,200.00
+M101,30,Monitor,300.00,700.00
+K001,20,Keyboard,200.00,650.00
+H001,20,Headphone,125.00,300.00
+A001,15,Adapter,100.00,150.00
+C001,10,Gaming Chair,500.00,1000.00
+S001,30,Speaker,170.00,300.00

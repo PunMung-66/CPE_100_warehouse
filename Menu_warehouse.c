@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "update.c"
 #define MAX_FIELD_SIZE 100
 #define MAX_RECORDS 100
 typedef struct {
@@ -67,6 +68,7 @@ int menuwarehouse() {
     if (a == 1) {
         system("cls");
         printf("\n[Update stock]\n\n");
+        UpdateStock();
 
     } 
     else if (a == 2) {
