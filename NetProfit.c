@@ -9,6 +9,8 @@ typedef struct {
     double quantity, cost, sell;
 } ProductBasket;
 
+double total[2] = {200,500};
+
 void printReceipt(ProductBasket *receipt, int numRecords) {
     printf("%-11s%-15s%-10s%-10s%-10s\n", "Code", "Quantity", "Name", "Cost", "Sell");
     printf("=========================================================\n");
