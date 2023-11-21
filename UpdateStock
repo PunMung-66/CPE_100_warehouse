@@ -15,37 +15,49 @@ void AddNewProduct();
 void EditProduct();
 
 int UpdateStock() {
-  char choice;
-  int choice1;
+  char choice[100];
+  int choice1=0,choice2=0,h=0;
+
   do {
     printf("=== (Update Menu) ===\n\n"); printf("(1) Add Units\n");
     printf("(2) Add New Product\n");
     printf("(3) Edit\n");
     printf("(4) Exit\n\n");
     printf("Choose your option: ");
-    scanf("%s", &choice);
-    if (choice < '1' || choice > '4')
-      choice = '0';
-    choice1 = choice - '0';
+    scanf("%s", choice);
+    system("clear");
+    h=strlen(choice);
+    if(h!=1){
+      choice2=9;
+    }
+    if (choice[0] < '1' || choice[0] > '4' || h!=1)
+      choice[0] = '0';
+    choice1 = choice[0] - '0';
     switch (choice1) {
 
     case 1:
+      printf("\n[Add option]\n\n");
       ShowStocks();
+      printf("\n");
       AddUnit();
       break;
     case 2:
+      printf("\n[AddNew option]\n\n");
       ShowStocks();
+      printf("\n");
       AddNewProduct();
       break;
     case 3:
+      printf("\n[Edit option]\n\n");
       ShowStocks();
+      printf("\n");
       EditProduct();
       break;
     case 4:
       printf("Exiting program.\n");
       break;
     default:
-      printf("Invalid choice. Try again.\n");
+      printf("Invalid choice. Try again.\n\n");
     }
 
   } while (choice1 != 4);
@@ -63,7 +75,6 @@ int ShowStocks() {
     char header[BUFFER_SIZE];
     int choice;
     fgets(header, sizeof(header), file);
-
     printf("%-*s%-*s%-*s%-*s%-*s\n", CODE_WIDTH, "Code", UNIT_WIDTH, "Unit",
            NAME_WIDTH, "Name", INITIAL_WIDTH, "Cost", SELL_WIDTH, "Sell");
 
