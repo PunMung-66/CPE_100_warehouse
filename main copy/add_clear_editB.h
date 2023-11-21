@@ -7,7 +7,7 @@
 int unit_basket[100];
 char name_basket[100][30], code_basket[100][30];
 
-void combine_basket()
+void combine_basket( double total[2] )
 {
     FILE *basketFile = fopen("basket.txt", "r");
     FILE *Tempfile = fopen("temp.txt", "w");
@@ -68,6 +68,8 @@ void combine_basket()
     fclose(Tempfile);
     remove("basket.txt");
     rename("temp.txt", "basket.txt");
+    total[0] = total_cost;
+    total[1] = total_profit;
 }
 
 int addToBasket(const char *code, char *name, int quantity, double cost, double sell) 
@@ -271,13 +273,13 @@ int showBasket_edit()
     {
         count++;
         printf("| (%d)", count);
-        int col = 0;
+        int col = 0; sum = 0;
         token = strtok(line, "-");
         while (token)
         {
             if (col == 0)
                 printf(" ");
-            if (col != 2 && col != 0)
+            if (col == 1 || col == 3 )
                 printf("\t");
             if (col == 2)
             {
@@ -290,10 +292,15 @@ int showBasket_edit()
             {
                 sell = atof(token);
                 sum += unit * sell;
-                printf("  %.2lf", sum);
+                printf("  %.2lf\n", sum);
             }
             col++;
-            token = strtok(NULL, "-");
+            if (col == 4)
+                token = strtok(NULL, "\n");
+            else 
+            {
+                token = strtok(NULL, "-");
+            }
         }
         printf("\n");
     }

@@ -1,9 +1,11 @@
 #include "add_clear_editB.h"
 #include "cashier_UI.h"
 
+double total[2] = {0, 0};
+
 void cashier_system()
 {
-    combine_basket();
+    combine_basket(total);
     showBasket();
     int cash_option = cashier();
     while (cash_option != 5)
@@ -12,7 +14,9 @@ void cashier_system()
         while ( cash_option == 0)
         {
             system("cls");
-            printf("\n** Please try again, your option is out of defined. **\n");
+            printf("\n(** Please try again, your option is out of defined. **)\n\n");
+            combine_basket(total);
+            showBasket();
             cash_option = cashier();
         }
         if ( cash_option == 1 )
@@ -20,21 +24,20 @@ void cashier_system()
             system("cls");
             printf("\n[Add option]\n\n");
             addToBasket_system();
-            combine_basket();
+            combine_basket(total);
         }
         else if ( cash_option == 2)
         {
             system("cls");
             printf("\n[Edit option]\n");
             editToBasket_system();
-            combine_basket();
+            combine_basket(total);
             }
         else if ( cash_option == 3)
         {
             system("cls");
-            //printf("\n[Clear option]\n");
             clear_basket();
-            combine_basket();
+            combine_basket(total);
             }
         else if ( cash_option == 4){system("cls");printf("\n[Calculate total]\n");}
         else if ( cash_option == 5){break;}
@@ -42,12 +45,13 @@ void cashier_system()
         cash_option = cashier();
     }
     system("cls");
+    system("cls");
     printf("\n>>> Main Menu\n");
 }
 
 int welcome()
 {
-    char option;
+    char option[10];
     int option_out;
     printf("\n\n=== Welcome to (Main Menu) ===\n\n");
     printf("(1) Cashier\n");
@@ -55,10 +59,10 @@ int welcome()
     printf("(3) Exit() \n\n");
     printf("Choose your option:\n\n");
     printf("CPE_100:\\Menu> ");
-    scanf("%s", &option);
-    if (option < '1' || option > '3')
-        option = '0';
-    option_out = option - '0';
+    scanf("%s", option);
+    if ((option[0] < '1' || option[0] > '3') || strlen(option) != 1)
+        option[0] = '0';
+    option_out = option[0] - '0';
     return(option_out);
 }
 
@@ -72,7 +76,7 @@ void welcome_system()
         while ( wel_option == 0)
         {
             system("cls");
-            printf("\n** Please try again, your option is out of defined. **\n");
+            printf("\n(** Please try again, your option is out of defined. **)\n\n");
             wel_option = welcome();
         }
         if ( wel_option == 1 ){system("cls");printf("\n>>> Cashier Menu\n\n");cashier_system();}

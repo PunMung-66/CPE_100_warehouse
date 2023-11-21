@@ -4,7 +4,8 @@
 
 void showBasket() 
 {
-    int count = 0;
+    int count = 0, unit = 0;
+    double sum = 0, sell = 0;
     char *token, line[100];
     FILE *basketFile = fopen("basket.txt", "r");
     if (basketFile == NULL) {
@@ -16,20 +17,34 @@ void showBasket()
     {
         count++;
         printf("|");
-        int col = 0;
+        int col = 0; sum = 0;
         token = strtok(line, "-");
         while (token)
         {
             if (col == 0)
                 printf(" ");
-            if (col != 2 && col != 0)
+            if (col == 1 || col == 3 )
                 printf("\t");
             if (col == 2)
+            {
+                unit = atoi(token);
                 printf(" x ");
+            }
             if (col != 3)
                 printf("%s", token);
+            if ( col == 4)
+            {
+                sell = atof(token);
+                sum += unit * sell;
+                printf("  %.2lf\n", sum);
+            }
             col++;
-            token = strtok(NULL, "-");
+            if (col == 4)
+                token = strtok(NULL, "\n");
+            else 
+            {
+                token = strtok(NULL, "-");
+            }
         }
         printf("\n");
     }
