@@ -23,15 +23,15 @@ int menuwarehouse() {
     while (fgets(line, sizeof(line), inputFile) && numRecords < MAX_RECORDS) {
         char *token = strtok(line, ",");
         if (token != NULL) {
-            strcpy(selling[numRecords].code, token);
+            strcpy(selling[numRecords].code, token); //code
             token = strtok(NULL, ",");
-            selling[numRecords].quantity = atof(token);
+            selling[numRecords].quantity = atof(token); //unit
             token = strtok(NULL, ",");
-            strcpy(selling[numRecords].name, token);
+            strcpy(selling[numRecords].name, token); //name
             token = strtok(NULL, ",");
-            selling[numRecords].initial = atof(token);
+            selling[numRecords].initial = atof(token); //cost
             token = strtok(NULL, ",");
-            selling[numRecords].sell = atof(token);
+            selling[numRecords].sell = atof(token); //sell
             numRecords++;
         }
     }
@@ -41,17 +41,18 @@ int menuwarehouse() {
 
     // Print alert
     for(;;){
-    printf("=== Select your option ===\n\n(1) Update stock\n(2) Show stock\n(3) Net profit\n(4) Exit\n\n");
+    printf("\n\n=== Welcome to (Warehouse Menu) ===\n\n(1) Update stock\n(2) Show stock\n(3) Net profit\n(4) Back(Main Menu)\n\n");
     for (int i = 0; i < numRecords; i++) {
         if (selling[i].quantity <= 4) {
-            printf("%s has only %.0f left!!\n", selling[i].name, selling[i].quantity);
+            printf("(Alert!!) %s has only %.0f left!!\n", selling[i].name, selling[i].quantity);
         }
     }
+    printf("\n");
     // Choose option
      int a, inputResult;
 
     while (1) {
-        printf("Please input your option: ");
+        printf("Choose your option:\n\nCPE_100:\\Menu\\Warehouse>");
         inputResult = scanf(" %d", &a);
         if (inputResult == 1 && (a == 1 || a == 2 || a == 3 || a == 4)) {
             break; // Valid input, exit the loop
@@ -64,23 +65,30 @@ int menuwarehouse() {
 
     // Perform action based on the selected option
     if (a == 1) {
-        printf("Update stock\n");
+        system("cls");
+        printf("\n[Update stock]\n\n");
 
-    } else if (a == 2) {
+    } 
+    else if (a == 2) {
         // Show stock
-        printf("                     ==Welcome to Warehouse menu==\n");
-        printf("Code               Quantity         Name               Cost           Sell\n");
+        system("cls");
+        printf("\n[Show stock option]\n\n");
+        printf("%-10s%-15s%-15s%-10s%-10s\n", "Code", "Quantity", "Name", "Cost", "Sell");
         for (int i = 0; i < numRecords; i++) {
-            printf("%-20s%-15.2f%-20s%-15.2f%-15.2f\n", selling[i].code, selling[i].quantity, selling[i].name, selling[i].initial, selling[i].sell);
+            printf("%-10s%-15.2f%-15s%-10.2f%-10.2f\n", selling[i].code, selling[i].quantity, selling[i].name, selling[i].initial, selling[i].sell);
         }
-    } else if (a == 3) {
-        printf("Net profit\n");
-    } else if (a == 4) {
-        printf("Exit\n");
+    } 
+    else if (a == 3) {
+        system("cls");
+        printf("\n[Show net profit]\n\n");
+    }
+    else if (a == 4) {
+        system("cls");
+        printf("\n>>> Main Menu\n\n");
         break; 
     }
     }
 }
 int main(){
-menuwarehouse();    
+menuwarehouse();   
 }
