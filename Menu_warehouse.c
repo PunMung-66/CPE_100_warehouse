@@ -4,23 +4,19 @@
 #include <ctype.h>
 #define MAX_FIELD_SIZE 100
 #define MAX_RECORDS 100
-
 typedef struct {
     char code[MAX_FIELD_SIZE], name[MAX_FIELD_SIZE];
     float quantity, initial, sell;
 } product;
-
 int menuwarehouse() {
-    FILE *inputFile = fopen("database.csv", "r");
+    FILE *inputFile = fopen("Database.csv", "r");
     if (inputFile == NULL) {
         printf("Error opening the input CSV file\n");
         return 1;
     }
-
     product selling[MAX_RECORDS];
     int numRecords = 0;
     char line[MAX_FIELD_SIZE];
-
     // Skip the first line (header)
     fgets(line, sizeof(line), inputFile);
 
@@ -41,15 +37,16 @@ int menuwarehouse() {
     }
 
     fclose(inputFile);
-    printf("Select your option\n(1) Update stock\n(2) Show stock\n(3) Net profit\n(4) Exit\n");
+    
 
     // Print alert
+    for(;;){
+    printf("=== Select your option ===\n\n(1) Update stock\n(2) Show stock\n(3) Net profit\n(4) Exit\n\n");
     for (int i = 0; i < numRecords; i++) {
         if (selling[i].quantity <= 4) {
             printf("%s has only %.0f left!!\n", selling[i].name, selling[i].quantity);
         }
     }
-
     // Choose option
      int a, inputResult;
 
@@ -68,10 +65,11 @@ int menuwarehouse() {
     // Perform action based on the selected option
     if (a == 1) {
         printf("Update stock\n");
+
     } else if (a == 2) {
         // Show stock
-        printf("            ==Welcome to Warehouse menu==\n");
-        printf("Code               Quantity         name               initial         sell\n");
+        printf("                     ==Welcome to Warehouse menu==\n");
+        printf("Code               Quantity         Name               Cost           Sell\n");
         for (int i = 0; i < numRecords; i++) {
             printf("%-20s%-15.2f%-20s%-15.2f%-15.2f\n", selling[i].code, selling[i].quantity, selling[i].name, selling[i].initial, selling[i].sell);
         }
@@ -79,7 +77,10 @@ int menuwarehouse() {
         printf("Net profit\n");
     } else if (a == 4) {
         printf("Exit\n");
+        break; 
     }
-
-    return 0;
+    }
+}
+int main(){
+menuwarehouse();    
 }
