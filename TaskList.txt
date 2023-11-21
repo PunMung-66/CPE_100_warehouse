@@ -7,3 +7,8 @@ Create Sold Function
 Create Net Profit Function
 - Add basket's net profit to the main profit storage in the warehouse
 - Return to the previous menu
+
+>>> Team Task List
+- Adding net profit function to sum the profit from basket onto the warehouse
+- Adding sorting function to the Database to make it void of blank data between each array of structs
+- Adding deleting function for the warehouse to sync the statement of the products after selling
