@@ -258,7 +258,8 @@ void edit_basket(int ch_line)
 
 int showBasket_edit()
 {
-    int count = 0;
+    int count = 0, unit = 0;
+    double sum = 0, sell = 0;
     char *token, line[100];
     FILE *basketFile = fopen("basket.txt", "r");
     if (basketFile == NULL) {
@@ -279,9 +280,18 @@ int showBasket_edit()
             if (col != 2 && col != 0)
                 printf("\t");
             if (col == 2)
+            {
+                unit = atoi(token);
                 printf(" x ");
+            }
             if (col != 3)
                 printf("%s", token);
+            if ( col == 4)
+            {
+                sell = atof(token);
+                sum += unit * sell;
+                printf("  %.2lf", sum);
+            }
             col++;
             token = strtok(NULL, "-");
         }
