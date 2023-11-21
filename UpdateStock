@@ -18,7 +18,7 @@ int UpdateStock() {
   char choice;
   int choice1;
   do {
-    printf("=== Welcome to (Warehouse Menu) ===\n\n"); printf("(1) Add Units\n");
+    printf("=== (Update Menu) ===\n\n"); printf("(1) Add Units\n");
     printf("(2) Add New Product\n");
     printf("(3) Edit\n");
     printf("(4) Exit\n\n");
@@ -48,7 +48,7 @@ int UpdateStock() {
       printf("Invalid choice. Try again.\n");
     }
 
-  } while (choice != 4);
+  } while (choice1 != 4);
 
   return 0;
 }
