@@ -9,6 +9,12 @@ typedef struct {
     char code[MAX_FIELD_SIZE], name[MAX_FIELD_SIZE];
     float quantity, initial, sell;
 } product;
+double total[2] = {200.0, 500.0}; // total profit
+double sumprofit=0;
+double netprofit(double profit) {
+	sumprofit+=profit;
+}
+
 int menuwarehouse() {
     FILE *inputFile = fopen("Database.csv", "r");
     if (inputFile == NULL) {
@@ -83,6 +89,8 @@ int menuwarehouse() {
     else if (a == 3) {
         system("cls");
         printf("\n[Show net profit]\n\n");
+        netprofit(total[1]);
+        printf("The net profit is %.2lf", sumprofit);
     }
     else if (a == 4) {
         system("cls");

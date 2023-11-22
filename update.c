@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #define BUFFER_SIZE 100
 #define CODE_WIDTH 5
 #define UNIT_WIDTH 5
@@ -18,38 +17,40 @@ int UpdateStock() {
   char choice;
   int choice1;
   do {
-    printf("=== Welcome to (Warehouse Menu) ===\n\n"); printf("(1) Add Units\n");
+    printf("=== Welcome to (Update Stock Menu) ===\n\n"); printf("(1) Add Units\n");
     printf("(2) Add New Product\n");
     printf("(3) Edit\n");
     printf("(4) Exit\n\n");
-    printf("Choose your option: ");
+    printf("Choose your option:\n\nCPE_100:\\Menu\\Warehouse\\Update_Stock>");
     scanf("%s", &choice);
     if (choice < '1' || choice > '4')
       choice = '0';
     choice1 = choice - '0';
     switch (choice1) {
-
     case 1:
       ShowStocks();
       AddUnit();
+      system("cls");
       break;
     case 2:
       ShowStocks();
       AddNewProduct();
+      system("cls");
       break;
     case 3:
       ShowStocks();
       EditProduct();
+      system("cls");
       break;
     case 4:
-      printf("Exiting program.\n");
-      break;
+      system("cls");
+      printf("You have returned to Warehouse Menu.\n");
+      return 0 ;
     default:
+      system("cls");
       printf("Invalid choice. Try again.\n");
     }
-
   } while (choice != 4);
-
   return 0;
 }
 
@@ -195,7 +196,6 @@ void AddNewProduct() {
     printf("Error opening the file.\n");
     return;
   }
-
   fprintf(file, "%s,%d,%s,%.2f,%.2f\n", newCode, newUnit, newName, newInitial,
           newSell);
 
@@ -260,7 +260,6 @@ void EditProduct() {
 
   fclose(file);
   fclose(tempFile);
-
   remove("Database.csv");
   rename("temp.csv", "Database.csv");
 
@@ -270,4 +269,3 @@ void EditProduct() {
     printf("Product %s not found.\n", targetCode);
   }
 }
-
