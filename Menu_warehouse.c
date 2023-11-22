@@ -90,7 +90,7 @@ int menuwarehouse() {
         system("cls");
         printf("\n[Show net profit]\n\n");
         netprofit(total[1]);
-        printf("The net profit is %.2lf", sumprofit);
+        printf("The net profit is %.2lf ", sumprofit);
     }
     else if (a == 4) {
         system("cls");
