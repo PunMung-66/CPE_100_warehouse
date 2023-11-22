@@ -5,6 +5,16 @@
 #include "update.c"
 #define MAX_FIELD_SIZE 100
 #define MAX_RECORDS 100
+#define BUFFER_SIZE 100
+#define CODE_WIDTH 5
+#define UNIT_WIDTH 5
+#define NAME_WIDTH 15
+#define INITIAL_WIDTH 10
+#define SELL_WIDTH 10
+int ShowStocks();
+void AddUnit();
+void AddNewProduct();
+void EditProduct();
 typedef struct {
     char code[MAX_FIELD_SIZE], name[MAX_FIELD_SIZE];
     float quantity, initial, sell;

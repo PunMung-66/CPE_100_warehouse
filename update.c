@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #define BUFFER_SIZE 100
 #define CODE_WIDTH 5
 #define UNIT_WIDTH 5
@@ -14,43 +15,53 @@ void AddNewProduct();
 void EditProduct();
 
 int UpdateStock() {
-  char choice;
-  int choice1;
+  char choice[100];
+  int choice1=0,choice2=0,h=0;
+
   do {
-    printf("=== Welcome to (Update Stock Menu) ===\n\n"); printf("(1) Add Units\n");
+    printf("=== (Update Menu) ===\n\n"); printf("(1) Add Units\n");
     printf("(2) Add New Product\n");
     printf("(3) Edit\n");
     printf("(4) Exit\n\n");
-    printf("Choose your option:\n\nCPE_100:\\Menu\\Warehouse\\Update_Stock>");
-    scanf("%s", &choice);
-    if (choice < '1' || choice > '4')
-      choice = '0';
-    choice1 = choice - '0';
+    printf("Choose your option: ");
+    scanf("%s", choice);
+    system("cls");
+    h=strlen(choice);
+    if(h!=1){
+      choice2=9;
+    }
+    if (choice[0] < '1' || choice[0] > '4' || h!=1)
+      choice[0] = '0';
+    choice1 = choice[0] - '0';
     switch (choice1) {
+
     case 1:
+      printf("\n[Add option]\n\n");
       ShowStocks();
+      printf("\n");
       AddUnit();
-      system("cls");
       break;
     case 2:
+      printf("\n[AddNew option]\n\n");
       ShowStocks();
+      printf("\n");
       AddNewProduct();
-      system("cls");
       break;
     case 3:
+      printf("\n[Edit option]\n\n");
       ShowStocks();
+      printf("\n");
       EditProduct();
-      system("cls");
       break;
     case 4:
-      system("cls");
-      printf("You have returned to Warehouse Menu.\n");
-      return 0 ;
+      printf("Exiting program.\n");
+      break;
     default:
-      system("cls");
-      printf("Invalid choice. Try again.\n");
+      printf("Invalid choice. Try again.\n\n");
     }
-  } while (choice != 4);
+
+  } while (choice1 != 4);
+
   return 0;
 }
 
@@ -64,7 +75,6 @@ int ShowStocks() {
     char header[BUFFER_SIZE];
     int choice;
     fgets(header, sizeof(header), file);
-
     printf("%-*s%-*s%-*s%-*s%-*s\n", CODE_WIDTH, "Code", UNIT_WIDTH, "Unit",
            NAME_WIDTH, "Name", INITIAL_WIDTH, "Cost", SELL_WIDTH, "Sell");
 
@@ -133,9 +143,11 @@ void AddUnit() {
   rename("temp.csv", "Database.csv");
 
   if (flagest == 1) {
-    printf("Units added successfully.\n");
+    system("cls");
+    printf("Units added successfully.\n\n");
   } else if (flagest == 0 && flag == 1) {
     printf("No product\n");
+    return AddUnit();
   }
 }
 void AddNewProduct() {
@@ -146,7 +158,7 @@ void AddNewProduct() {
   printf("Enter the new product code: ");
   if (scanf("%s", newCode) != 1) {
     printf("Invalid input for product code.\n");
-    return;
+    return ;
   }
   FILE *file = fopen("Database.csv", "r");
   if (file != NULL) {
@@ -157,9 +169,9 @@ void AddNewProduct() {
       if (strcmp(newCode, code) == 0) {
         fclose(file);
         printf("Product with the same code already exists.\n");
-        return;
+        return AddNewProduct();
       }
-    }
+    } 
 
     fclose(file);
   } else {
@@ -170,24 +182,28 @@ void AddNewProduct() {
   printf("Enter the number of units: ");
   if (scanf("%d", &newUnit) != 1 || newUnit < 0) {
     printf("Invalid input for number of units.\n");
+    system("cls");
     return;
   }
 
   printf("Enter the product name: ");
   if (scanf("%s", newName) != 1) {
     printf("Invalid input for product name.\n");
+    system("cls");
     return;
   }
 
   printf("Enter the initial price: ");
   if (scanf("%f", &newInitial) != 1 || newInitial < 0) {
     printf("Invalid input for initial price.\n");
+    system("cls");
     return;
   }
 
   printf("Enter the sell price: ");
   if (scanf("%f", &newSell) != 1 || newSell < 0) {
     printf("Invalid input for sell price.\n");
+    system("cls");
     return;
   }
 
@@ -196,12 +212,14 @@ void AddNewProduct() {
     printf("Error opening the file.\n");
     return;
   }
+
   fprintf(file, "%s,%d,%s,%.2f,%.2f\n", newCode, newUnit, newName, newInitial,
           newSell);
 
   fclose(file);
+  system("cls");
+  printf("New product added successfully.\n\n");
 
-  printf("New product added successfully.\n");
 }
 void EditProduct() {
   char targetCode[CODE_WIDTH];
@@ -260,12 +278,15 @@ void EditProduct() {
 
   fclose(file);
   fclose(tempFile);
+
   remove("Database.csv");
   rename("temp.csv", "Database.csv");
 
   if (found) {
-    printf("Product %s edited successfully.\n", targetCode);
+    system("cls");
+    printf("Product %s edited successfully.\n\n", targetCode);
   } else {
     printf("Product %s not found.\n", targetCode);
+    return EditProduct();
   }
 }
