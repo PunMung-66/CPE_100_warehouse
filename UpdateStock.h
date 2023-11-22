@@ -143,9 +143,11 @@ void AddUnit() {
   rename("temp.csv", "Database.csv");
 
   if (flagest == 1) {
-    printf("Units added successfully.\n");
+    system("clear");
+    printf("Units added successfully.\n\n");
   } else if (flagest == 0 && flag == 1) {
     printf("No product\n");
+    return AddUnit();
   }
 }
 void AddNewProduct() {
@@ -156,7 +158,7 @@ void AddNewProduct() {
   printf("Enter the new product code: ");
   if (scanf("%s", newCode) != 1) {
     printf("Invalid input for product code.\n");
-    return;
+    return ;
   }
   FILE *file = fopen("Database.csv", "r");
   if (file != NULL) {
@@ -167,7 +169,7 @@ void AddNewProduct() {
       if (strcmp(newCode, code) == 0) {
         fclose(file);
         printf("Product with the same code already exists.\n");
-        return;
+        return AddNewProduct();
       }
     }
 
@@ -180,24 +182,28 @@ void AddNewProduct() {
   printf("Enter the number of units: ");
   if (scanf("%d", &newUnit) != 1 || newUnit < 0) {
     printf("Invalid input for number of units.\n");
+    system("clear");
     return;
   }
 
   printf("Enter the product name: ");
   if (scanf("%s", newName) != 1) {
     printf("Invalid input for product name.\n");
+    system("clear");
     return;
   }
 
   printf("Enter the initial price: ");
   if (scanf("%f", &newInitial) != 1 || newInitial < 0) {
     printf("Invalid input for initial price.\n");
+    system("clear");
     return;
   }
 
   printf("Enter the sell price: ");
   if (scanf("%f", &newSell) != 1 || newSell < 0) {
     printf("Invalid input for sell price.\n");
+    system("clear");
     return;
   }
 
@@ -211,8 +217,9 @@ void AddNewProduct() {
           newSell);
 
   fclose(file);
+  system("clear");
+  printf("New product added successfully.\n\n");
 
-  printf("New product added successfully.\n");
 }
 void EditProduct() {
   char targetCode[CODE_WIDTH];
@@ -276,10 +283,10 @@ void EditProduct() {
   rename("temp.csv", "Database.csv");
 
   if (found) {
-    printf("Product %s edited successfully.\n", targetCode);
+    system("clear");
+    printf("Product %s edited successfully.\n\n", targetCode);
   } else {
     printf("Product %s not found.\n", targetCode);
+    return EditProduct();
   }
 }
-
-int main() { UpdateStock(); }
