@@ -1,37 +1,17 @@
+#include "csv2bin.h"
+#include "product.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "product.h"
-#include "csv2bin.h"
 
 void csv2bin() {
-  char csvFileName[100];
-  printf("Enter the CSV file name: ");
-  scanf("%s", csvFileName);
+  const char *csvFileName = "Database.csv";
+  const char *binFileName = "Database.bin";
 
   FILE *csvFile = fopen(csvFileName, "r");
   if (csvFile == NULL) {
-    csv2bin();
-  }
-  // create binary file
-  char binFileName[100];
-  printf("Enter the BIN file name (or press Enter for default): ");
-  char temp[2];
-  fgets(temp, sizeof(temp), stdin);
-  fgets(binFileName, sizeof(binFileName), stdin);
-  binFileName[strcspn(binFileName, "\n")] = '\0';
-
-  //default file name
-  if (binFileName[0] == '\0') {
-    strcpy(binFileName, csvFileName);
-    char *dot = strrchr(binFileName, '.');
-    if (dot != NULL) {
-      *dot = '\0';
-    }
-    strcat(binFileName, "_result.bin");
-  }
-  else{
-    strcat(binFileName, ".bin");
+    printf("Error opening CSV file.\n");
+    return;
   }
 
   FILE *binFile = fopen(binFileName, "wb");
@@ -52,4 +32,8 @@ void csv2bin() {
   fclose(csvFile);
   fclose(binFile);
 
+  printf("CSV to Binary conversion completed. Binary file: %s\n", binFileName);
+
+  // Delete the CSV file
+  remove(csvFileName);
 }
