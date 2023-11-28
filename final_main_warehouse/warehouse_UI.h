@@ -7,9 +7,9 @@
 #define MAX_FIELD_SIZE 100
 #define MAX_RECORDS 100
 #define BUFFER_SIZE 100
-#define CODE_WIDTH 5
-#define UNIT_WIDTH 5
-#define NAME_WIDTH 15
+#define CODE_WIDTH 11
+#define UNIT_WIDTH 11
+#define NAME_WIDTH 20
 #define INITIAL_WIDTH 10
 #define SELL_WIDTH 10
 
@@ -104,7 +104,7 @@ int ShowStocks() {
         int unit;
         char name[100];
         float cost, sell;
-        while (fscanf(file, "%5[^,],%d,%20[^,],%f,%f\n", code, &unit, name, &cost, &sell) == 5) {
+        while (fscanf(file, "%10[^,],%d,%20[^,],%f,%f\n", code, &unit, name, &cost, &sell) == 5) {
             printf("%-*s%-*d%-*s%-*.2f%-*.2f\n", 10, code, 15, unit, 15, name, 15, cost, 15, sell);
         }
         fclose(file);
@@ -142,7 +142,7 @@ void AddUnit() {
   char name[NAME_WIDTH];
   float initial, sell;
 
-  while (fscanf(file, "%5[^,],%d,%20[^,],%f,%f\n", code, &unit, name, &initial,
+  while (fscanf(file, "%10[^,],%d,%20[^,],%f,%f\n", code, &unit, name, &initial,
                 &sell) == 5) {
     if (strcmp(code, targetCode) == 0) {
       while (additionalUnits <= 0) {
@@ -282,7 +282,7 @@ void EditProduct() {
 
   int found = 0;
 
-  while (fscanf(file, "%5[^,],%d,%20[^,],%f,%f\n", code, &unit, name, &initial,
+  while (fscanf(file, "%10[^,],%d,%20[^,],%f,%f\n", code, &unit, name, &initial,
                 &sell) == 5) {
     if (strcmp(code, targetCode) == 0) {
       printf("Current details for product %s:\n", targetCode);
@@ -437,7 +437,7 @@ void RemoveStock() {
     printf("Enter the product code to remove: ");
     scanf("%s", targetCode);
 
-    while (fscanf(file, "%5[^,],%d,%20[^,],%f,%f\n", code, &unit, name, &initial, &sell) == 5) {
+    while (fscanf(file, "%10[^,],%d,%20[^,],%f,%f\n", code, &unit, name, &initial, &sell) == 5) {
         if (strcmp(code, targetCode) == 0) {
             found = 1;
             continue;
@@ -479,7 +479,7 @@ void ClearStock() {
 
     int found = 0;
 
-    while (fscanf(file, "%5[^,],%d,%20[^,],%f,%f\n", code, &unit, name, &initial, &sell) == 5) {
+    while (fscanf(file, "%10[^,],%d,%20[^,],%f,%f\n", code, &unit, name, &initial, &sell) == 5) {
         if (unit == 0) {
             found = 1;
             continue;
