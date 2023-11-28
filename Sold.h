@@ -25,12 +25,26 @@ int readBasketData(ProductBasket *receipt) {
     }
 
     int numRecords = 0;
-    while (fscanf(file, "%[^-]-%[^-]-%lf-%lf-%lf",
-                  receipt[numRecords].code,
-                  receipt[numRecords].name,
-                  &receipt[numRecords].quantity,
-                  &receipt[numRecords].cost,
-                  &receipt[numRecords].sell) == 5) {
+    char line[99];
+    while (fgets(line, sizeof(line), file) != NULL) 
+    {
+      int col = 0;
+      char *token = strtok(line, "-");
+      while (token)
+      {
+        if (col == 0)
+          strcpy(receipt[numRecords].code, token);
+        else if (col == 1)
+          strcpy(receipt[numRecords].name, token);
+        else if (col == 2)
+          receipt[numRecords].quantity = atoi(token);
+        else if (col == 3)
+          receipt[col].cost = atof(token);
+        else if (col == 4)
+          receipt[numRecords].sell = atof(token);
+        token = strtok(NULL, "-");
+        col++;
+      }
         numRecords++;
         if (numRecords >= MAX_RECORDS) {
             printf("Exceeded maximum number of records. Increase MAX_RECORDS if needed.\n");
@@ -50,13 +64,27 @@ int readProductData(Product *products) {
     }
     int numRecords = 0;
     char header[MAX_FIELD_SIZE];
+    char line[99];
     fgets(header, sizeof(header), file);
-    while (fscanf(file, "%[^,],%d,%[^,],%lf,%lf",
-                  products[numRecords].code,
-                  &products[numRecords].unit,
-                  products[numRecords].name,
-                  &products[numRecords].initial,
-                  &products[numRecords].sell) == 5) {
+    while (fgets(line, sizeof(line), file) != NULL) 
+    {
+      int col = 0;
+      char *token = strtok(line, ",");
+      while (token)
+      {
+        if (col == 0)
+          strcpy(products[numRecords].code, token);
+        else if (col == 2)
+          strcpy(products[numRecords].name, token);
+        else if (col == 1)
+          products[numRecords].unit = atoi(token);
+        else if (col == 3)
+          products[numRecords].initial = atof(token);
+        else if (col == 4)
+          products[numRecords].sell = atof(token);
+        token = strtok(NULL, ",");
+        col++;
+      }
         numRecords++;
         if (numRecords >= MAX_RECORDS) {
             printf("Exceeded maximum number of records. Increase MAX_RECORDS if needed.\n");
@@ -82,19 +110,20 @@ void writeProductDataToFile(Product *products, int numProductRecords) {
     FILE *file = fopen("temp.csv", "w");
 
     if (file == NULL) {
-        printf("Error opening the file 'Data.csv' for writing.\n");
+        printf("Error opening the file 'temp.csv' for writing.\n");
         return;
     }
+
     fprintf(file, "Code,Unit,Name,Initial(฿),Sell(฿)\n");
+
     for (int i = 0; i < numProductRecords; i++) {
-        fprintf(file, "%s,%d,%s,%.2lf,%.2lf",
+        fprintf(file, "%s,%d,%s,%.2lf,%.2lf\n",
                 products[i].code,
                 products[i].unit,
                 products[i].name,
                 products[i].initial,
                 products[i].sell);
     }
-
     fclose(file);
     remove("Database.csv");
     rename("temp.csv", "Database.csv");
