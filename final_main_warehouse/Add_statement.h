@@ -45,20 +45,13 @@ void  add_statement( int total_cost, int totl_profit)
             token = strtok(NULL, "-");
             col++;
         }
-        fprintf(state_file,"%s,%d,%s,%lf,%lf,%s\n", code_basket, unit_basket, name_basket, cost, sell, time_n);
-        printf("%s,%d,%s,%lf,%lf,%s\n", code_basket, unit_basket, name_basket, cost, sell, time_n);
+        fprintf(state_file,"%s,%s,%d,%s,%lf,%lf\n", time_n, code_basket, unit_basket, name_basket, cost, sell);
+        //printf("%s,%d,%s,%lf,%lf,%s\n", code_basket, unit_basket, name_basket, cost, sell, time_n);
     }
-    fprintf(state_file, "%s,%d,%s,%s,%d,%s\n", "Total", total_cost, "", "Profit", totl_profit, time_n);
+    fprintf(state_file, "%s,%s,%d,%s,%s,%d\n", time_n, "Total", total_cost, "", "Profit", totl_profit);
     fprintf(state_file, ",,,,,,\n");
 
     fclose(basketFile);
     fclose(state_file);
     return;
-}
-
-int main()
-{
-    double total[2] = {100, 200};
-    add_statement(total[0], total[1]);
-    return (0);
 }

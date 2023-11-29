@@ -3,6 +3,7 @@
 #include "cashier_UI.h"
 #include "Sold.h"
 #include "bin_csv.h"
+#include "Add_statement.h"
 
 void cashier_system()
 {
@@ -44,6 +45,7 @@ void cashier_system()
         {
             system("cls");
             printf("\n[Save & Sold]\n");
+            add_statement(total[0], total[1]);
             Sold();
             netprofit(total[1]);
             clear_basket();
