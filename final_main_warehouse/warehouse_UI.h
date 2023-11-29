@@ -181,7 +181,7 @@ void AddNewProduct() {
   float newInitial, newSell;
   printf("Enter the new product code(Enter 0 for cancel): ");
   if (scanf("%s", newCode) != 1) {
-    printf("Invalid input for product code.\n");
+    printf("\n(* Invalid input for product code. *)\n\n");
     return ;
   }
   if (strcmp(newCode, "0") == 0) {
@@ -209,29 +209,29 @@ void AddNewProduct() {
 
   printf("Enter the number of units: ");
   if (scanf("%d", &newUnit) != 1 || newUnit < 0) {
-    printf("Invalid input for number of units.\n");
     system("cls");
+    printf("\n(* Invalid input for number of units. *)\n\n");
     return;
   }
 
   printf("Enter the product name: ");
   if (scanf("%s", newName) != 1) {
-    printf("Invalid input for product name.\n");
     system("cls");
+    printf("\n(* Invalid input for product name. *)\n\n");
     return;
   }
 
   printf("Enter the initial price: ");
   if (scanf("%f", &newInitial) != 1 || newInitial < 0) {
-    printf("Invalid input for initial price.\n");
     system("cls");
+    printf("\n(* Invalid input for initial price. *)\n\n");
     return;
   }
 
   printf("Enter the sell price: ");
   if (scanf("%f", &newSell) != 1 || newSell < 0) {
-    printf("Invalid input for sell price.\n");
     system("cls");
+    printf("\n(* Invalid input for sell price. *)\n\n");
     return;
   }
 
@@ -292,12 +292,23 @@ void EditProduct() {
 
       printf("Enter new number of units: ");
       scanf("%d", &newUnit);
-
+      if (newUnit < 0) {
+        system("cls");
+        printf("\n(* Invalid input. Number of units cannot be below 0. *)\n\n");
+        return;}
       printf("Enter new initial price: ");
       scanf("%f", &newInitial);
+      if (newInitial < 0) {
+        system("cls");
+        printf("\n(* Invalid input. Number of units cannot be below 0. *)\n\n");
+        return;}
 
       printf("Enter new sell price: ");
       scanf("%f", &newSell);
+      if (newSell < 0) {
+        system("cls");
+        printf("\n(* Invalid input. Number of units cannot be below 0. *)\n\n");
+        return;}
 
       strcpy(name, newName);
       unit = newUnit;
