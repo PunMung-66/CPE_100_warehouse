@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "sumprofit.h"
+#include "read.h"
 #include "total.h"
 #define MAX_FIELD_SIZE 100
 #define MAX_RECORDS 100
@@ -376,7 +377,7 @@ int menuwarehouse() {
 
     // Print alert
     
-    printf("\n\n=== Welcome to (Warehouse Menu) ===\n\n(1) Update stock\n(2) Show stock\n(3) Net profit\n(4) Back(Main Menu)\n\n");
+    printf("\n\n=== Welcome to (Warehouse Menu) ===\n\n(1) Update stock\n(2) Show stock\n(3) Net profit\n(4) Readstatement\n(5) Back(Main Menu)\n\n");
 
 
     for (int i = 0; i < numRecords; i++) {
@@ -391,10 +392,10 @@ int menuwarehouse() {
     while (1) {
         printf("Choose your option:\n\nCPE_100:\\Menu\\Warehouse>");
         inputResult = scanf(" %d", &a);
-        if (inputResult == 1 && (a == 1 || a == 2 || a == 3 || a == 4)) {
+        if (inputResult == 1 && (a == 1 || a == 2 || a == 3 || a == 4 || a == 5)) {
             break; // Valid input, exit the loop
         } else {
-            printf("Please input a valid number (1, 2, 3, or 4)\n");  // Clear the input buffer
+            printf("Please input a valid number (1, 2, 3, 4 or 5)\n");  // Clear the input buffer
             while (getchar() != '\n');   // Keep reading characters until a newline is encountered
         }
     }
@@ -418,6 +419,12 @@ int menuwarehouse() {
         printf("The net profit is %.2lf ", sumprofit);
     }
     else if (a == 4) {
+        system("cls");
+        printf("\n>>> [Read statement]\n\n");
+        readstate();
+  
+    }
+      else if (a == 5) {
         system("cls");
         printf("\n>>> Main Menu\n\n");
         break; 

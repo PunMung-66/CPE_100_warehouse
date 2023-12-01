@@ -4,6 +4,7 @@
 #include "Sold.h"
 #include "bin_csv.h"
 #include "Add_statement.h"
+#include "login.h"
 
 void cashier_system()
 {
@@ -112,7 +113,7 @@ void welcome_system()
 }
 
 int main()
-{
+{   loginall();
     netprofit(0);
     welcome_system();
     return (0);
