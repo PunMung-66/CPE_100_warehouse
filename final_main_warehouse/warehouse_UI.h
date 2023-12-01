@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "sumprofit.h"
-#include "read.h"
+#include "read_state.h"
 #include "total.h"
 #define MAX_FIELD_SIZE 100
 #define MAX_RECORDS 100
