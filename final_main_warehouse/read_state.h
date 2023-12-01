@@ -33,11 +33,12 @@ int readstate() {
 
     struct Record records[100];
     int recordCount = 0;
+    ssize_t read;
 
-    char *line = NULL;
+    char line[100];
     size_t lineSize = 0;
 
-    while (getline(&line, &lineSize, file) != -1) {
+    while (fgets(line, sizeof(line), file) != NULL) {
         if (isCommaLine(line)) {
             continue;
         }
@@ -68,11 +69,12 @@ int readstate() {
     }
 
     fclose(file);
-    free(line);
     int inp,a;
     while (1) {
-        printf("Choose to input (1) Date or (2) Month or (3) Year:");
+        system("cls");
+        printf("Choose\n\n(1) Date or (YYYY-MM-DD) \n(2) Month or (YYYY-MM)\n(3) Year: (YYYY)\n\nto input:");
         inp = scanf(" %d", &a);
+        printf("\n");
         if (inp == 1 && (a == 1 || a == 2 || a == 3 )) {
             break; // Valid input, exit the loop
         } else {
@@ -86,6 +88,7 @@ int readstate() {
     int count=0;
     char date[50];
     scanf("%s", date);
+    printf("\n");
     for (int i = 0; i < recordCount; i++) {
         if (strcmp(date, records[i].day) == 0) {
             printf("Code: %s, Number: %d, Name: %s, Initial: %.2f, Sell: %.2f\n",
