@@ -33,11 +33,12 @@ int readstate() {
 
     struct Record records[100];
     int recordCount = 0;
+    ssize_t read;
 
-    char *line = NULL;
+    char line[100];
     size_t lineSize = 0;
 
-    while (getline(&line, &lineSize, file) != -1) {
+    while (fgets(line, sizeof(line), file) != NULL) {
         if (isCommaLine(line)) {
             continue;
         }
@@ -68,11 +69,12 @@ int readstate() {
     }
 
     fclose(file);
-    free(line);
     int inp,a;
     while (1) {
-        printf("Choose to input (1) Date or (2) Month or (3) Year:");
+        system("cls");
+        printf("Choose\n\n(1) Date or (YYYY-MM-DD) \n(2) Month or (YYYY-MM)\n(3) Year: (YYYY)\n\nto input:");
         inp = scanf(" %d", &a);
+        printf("\n");
         if (inp == 1 && (a == 1 || a == 2 || a == 3 )) {
             break; // Valid input, exit the loop
         } else {
@@ -86,6 +88,7 @@ int readstate() {
     int count=0;
     char date[50];
     scanf("%s", date);
+    printf("\n");
     for (int i = 0; i < recordCount; i++) {
         if (strcmp(date, records[i].day) == 0) {
             printf("Code: %s, Number: %d, Name: %s, Initial: %.2f, Sell: %.2f\n",
@@ -104,15 +107,11 @@ int readstate() {
     }
     else if (a == 2) {
         printf("Input Month: ");
-        char month[3]; // Adjust size for null terminator
-        scanf("%2s", month); // Limit input to 2 characters (plus null terminator)
-        char b[3];
+        char month[6]; // Adjust size for null terminator
+        scanf("%6s", month); // Limit input to 2 characters (plus null terminator)
         int c=0;
-        b[0] = month[0];
-        b[1] = month[1];
-        b[2] = '\0';
         for (int i = 0; i < recordCount; i++) {
-        if (strstr(records[i].day,b)){
+        if (strstr(records[i].day,month)){
              printf("Code: %s, Number: %d, Name: %s, Initial: %.2f, Sell: %.2f\n",
                    records[i].code, records[i].number, records[i].name, records[i].initial, records[i].sell);
                    c++;
@@ -127,17 +126,11 @@ int readstate() {
     }
     else if (a == 3) {
         printf("Input Year: ");
-        char year[3]; // Adjust size for null terminator
+        char year[4]; // Adjust size for null terminator
         scanf("%4s", year); 
-        char b[4];
         int c=0;
-        b[0] = year[0];
-        b[1] = year[1];
-        b[2] = year[2];
-        b[3] = year[3];
-        b[4] = '\0';
         for (int i = 0; i < recordCount; i++) {
-        if (strstr(records[i].day,b)){
+        if (strstr(records[i].day,year)){
              printf("Code: %s, Number: %d, Name: %s, Initial: %.2f, Sell: %.2f\n",
                    records[i].code, records[i].number, records[i].name, records[i].initial, records[i].sell);
                    c++;
@@ -154,6 +147,8 @@ int readstate() {
   
 
     }
+
+    
     
 
 
