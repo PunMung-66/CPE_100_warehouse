@@ -116,6 +116,7 @@ int main()
 {   
     system("cls");
     loginall();
+    netprofit(0);
     welcome_system();
     return (0);
 }
