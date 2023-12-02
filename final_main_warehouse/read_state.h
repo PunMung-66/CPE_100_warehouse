@@ -158,7 +158,7 @@ int readstate() {
         }
         }
         if(c==0){
-        printf("No information in that year");
+        printf("No information in that year.");
     }
         
     }
