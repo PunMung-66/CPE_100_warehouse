@@ -50,9 +50,7 @@ int readstate() {
 
         // Check for the correct number of fields (7) and handle missing or empty fields
         if (result >= 4) {
-            if (result < 7) {
-                record.sell = 0.0; // Default value for missing "Sell" field
-            }
+            
             if (result < 5) {
                 record.name[0] = '\0'; // Default value for missing "Name" field
             }
@@ -85,38 +83,41 @@ int readstate() {
 
     if (a == 1) { 
     printf("Input date: ");
-    int count=0;
+    int c=0;
     char date[50];
     scanf("%s", date);
     printf("\n");
     for (int i = 0; i < recordCount; i++) {
-        if (strcmp(date, records[i].day) == 0) {
+        if (strcmp(date, records[i].day) == 0 && strcmp("Total",records[i].code)!=0 ) {
             printf("Code: %s, Number: %d, Name: %s, Initial: %.2f, Sell: %.2f\n",
                    records[i].code, records[i].number, records[i].name, records[i].initial, records[i].sell);
-                   count++;
+                   c++;
         }
-        if (records[i].day[0] == '\0') {
-            printf("\n");
-        }
-        if(strcmp("Total",records[i].code)==0){
+        if(strcmp("Total",records[i].code)==0 && strcmp(date, records[i].day) == 0 ){
+            printf("%s,  %d,  profit, %.2f\n",
+            records[i].code, records[i].number,records[i].sell);
+            c++;
             printf("\n");
         }}
-    if(count==0){
+    if(c==0){
         printf("No information in that day");
     }
     }
     else if (a == 2) {
         printf("Input Month: ");
-        char month[6]; // Adjust size for null terminator
-        scanf("%6s", month); // Limit input to 2 characters (plus null terminator)
+        char month[7]; // Adjust size for null terminator
+        scanf("%7s", month); 
         int c=0;
         for (int i = 0; i < recordCount; i++) {
-        if (strstr(records[i].day,month)){
+        if (strstr(records[i].day,month) && strcmp("Total",records[i].code)!=0){
              printf("Code: %s, Number: %d, Name: %s, Initial: %.2f, Sell: %.2f\n",
                    records[i].code, records[i].number, records[i].name, records[i].initial, records[i].sell);
                    c++;
         }
-        if(strcmp("Total",records[i].code)==0){
+        if(strcmp("Total",records[i].code)==0 && strstr(records[i].day,month)){
+            printf("%s,  %d,  profit, %.2f\n",
+            records[i].code, records[i].number,records[i].sell);
+            c++;
             printf("\n");
         }
         }
@@ -130,12 +131,15 @@ int readstate() {
         scanf("%4s", year); 
         int c=0;
         for (int i = 0; i < recordCount; i++) {
-        if (strstr(records[i].day,year)){
+        if (strstr(records[i].day,year) && strcmp("Total",records[i].code)!=0){
              printf("Code: %s, Number: %d, Name: %s, Initial: %.2f, Sell: %.2f\n",
                    records[i].code, records[i].number, records[i].name, records[i].initial, records[i].sell);
                    c++;
         }
-        if(strcmp("Total",records[i].code)==0){
+        if(strcmp("Total",records[i].code)==0 && strstr(records[i].day,year)){
+            printf("%s,  %d,  profit, %.2f\n",
+            records[i].code, records[i].number,records[i].sell);
+            c++;
             printf("\n");
         }
         }
