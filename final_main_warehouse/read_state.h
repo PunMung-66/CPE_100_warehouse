@@ -26,7 +26,7 @@ int readstate() {
     FILE *file = fopen("statement.csv", "r");
 
     if (file == NULL) {
-        fprintf(stderr, "Error opening the file!\n");
+        fprintf(stderr, "(* No statement and order *)\n");
         fclose(file);
         return 1;
     }
@@ -71,14 +71,14 @@ int readstate() {
     fclose(file);
     int inp,a;
     while (1) {
-        system("cls");
         printf("Choose\n\n(1) Date or (YYYY-MM-DD) \n(2) Month or (YYYY-MM)\n(3) Year: (YYYY)\n\nto input:");
         inp = scanf(" %d", &a);
         printf("\n");
         if (inp == 1 && (a == 1 || a == 2 || a == 3 )) {
             break; // Valid input, exit the loop
         } else {
-            printf("Please input a valid number (1, 2 or 3)\n");  // Clear the input buffer
+            system("cls");
+            printf("(* Please input a valid number (1, 2 or 3) *)\n\n");  // Clear the input buffer
             while (getchar() != '\n');   // Keep reading characters until a newline is encountered
         }
     }

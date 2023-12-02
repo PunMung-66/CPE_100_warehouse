@@ -113,8 +113,10 @@ void welcome_system()
 }
 
 int main()
-{   loginall();
-    netprofit(0);
+{   
+    system("cls");
+    loginall();
+    //netprofit(0);
     welcome_system();
     return (0);
 }
