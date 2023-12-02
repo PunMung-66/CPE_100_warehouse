@@ -22,8 +22,8 @@ int loginall() {
             system("cls");
             printf("Login failed. Please check your username and password. %d attempts remaining.\n", attempts);
             if (attempts == 0) {
-                printf("Sorry, you've run out of attempts. Account locked.\n");
-                break;  // Exit the loop if no attempts are remaining
+                printf("(* Sorry, you've run out of attempts. Account locked. *)\n");
+                exit(0);  // Exit the loop if no attempts are remaining
             }
         }
     }
