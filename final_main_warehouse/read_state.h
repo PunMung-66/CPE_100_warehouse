@@ -80,13 +80,17 @@ int readstate() {
             while (getchar() != '\n');   // Keep reading characters until a newline is encountered
         }
     }
-
-    if (a == 1) { 
+    if (a == 1) {   
     printf("Input date: ");
     int c=0;
     char date[50];
     scanf("%s", date);
     printf("\n");
+    int l = strlen(date);
+    if(l!=10){
+        printf("No information in that day");
+        return 0;
+        }
     for (int i = 0; i < recordCount; i++) {
         if (strcmp(date, records[i].day) == 0 && strcmp("Total",records[i].code)!=0 ) {
             printf("Code: %s, Number: %d, Name: %s, Initial: %.2f, Sell: %.2f\n",
@@ -105,9 +109,14 @@ int readstate() {
     }
     else if (a == 2) {
         printf("Input Month: ");
-        char month[7]; // Adjust size for null terminator
+        char month[7]; 
         scanf("%7s", month); 
         int c=0;
+        int l = strlen(month);
+        if(l!=7){
+            printf("No information in that month");
+            return 0;
+        }
         for (int i = 0; i < recordCount; i++) {
         if (strstr(records[i].day,month) && strcmp("Total",records[i].code)!=0){
              printf("Code: %s, Number: %d, Name: %s, Initial: %.2f, Sell: %.2f\n",
@@ -130,6 +139,10 @@ int readstate() {
         char year[4]; // Adjust size for null terminator
         scanf("%4s", year); 
         int c=0;
+        int l = strlen(year);
+        if(l!=4){
+        printf("No information in that year");
+        return 0; }
         for (int i = 0; i < recordCount; i++) {
         if (strstr(records[i].day,year) && strcmp("Total",records[i].code)!=0){
              printf("Code: %s, Number: %d, Name: %s, Initial: %.2f, Sell: %.2f\n",
@@ -147,13 +160,4 @@ int readstate() {
             printf("No information in that year");
         }
     }
-  
-  
-
     }
-
-    
-    
-
-
-
