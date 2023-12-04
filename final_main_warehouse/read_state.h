@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-struct Record {
+struct Record { //struct of recording each value in readstate file
     char day[50];
     char time[50];
     char code[50];
@@ -22,7 +22,7 @@ int isCommaLine(const char *line) {
     return 1;
 }
 //readstate
-int readstate() {
+int readstate() { //readstate function
     FILE *file = fopen("statement.csv", "r");
 
     if (file == NULL) {
@@ -81,67 +81,66 @@ int readstate() {
         }
     }
     if (a == 1) {   
-    printf("Input date: ");
+    printf("Input date: "); //input date
     int c=0;
     char date[50];
     scanf("%s", date);
     printf("\n");
     int l = strlen(date);
-    if(l!=10){
+    if(l!=10){ //check if string doesn't equal so there is no information in that day
         printf("No information in that day");
-        return 0;
-        }
-    for (int i = 0; i < recordCount; i++) {
+        return 0;}
+    for (int i = 0; i < recordCount; i++) { //print the information in that day
         if (strcmp(date, records[i].day) == 0 && strcmp("Total",records[i].code)!=0 ) {
             printf("Code: %s, Number: %d, Name: %s, Initial: %.2f, Sell: %.2f\n",
                    records[i].code, records[i].number, records[i].name, records[i].initial, records[i].sell);
                    c++;
         }
-        if(strcmp("Total",records[i].code)==0 && strcmp(date, records[i].day) == 0 ){
+        if(strcmp("Total",records[i].code)==0 && strcmp(date, records[i].day) == 0 ){ //print total line
             printf("%s,  %d,  profit, %.2f\n",
             records[i].code, records[i].number,records[i].sell);
             c++;
             printf("\n");
         }}
-    if(c==0){
+    if(c==0){ //check if nothing print out
         printf("No information in that day");
     }
     }
     else if (a == 2) {
-        printf("Input Month: ");
+        printf("Input Month: "); //input month
         char month[7]; 
         scanf("%7s", month); 
         int c=0;
         int l = strlen(month);
-        if(l!=7){
+        if(l!=7){ //no info in that month if string doesn't equal
             printf("No information in that month");
             return 0;
         }
-        for (int i = 0; i < recordCount; i++) {
+        for (int i = 0; i < recordCount; i++) { //print the information in that month
         if (strstr(records[i].day,month) && strcmp("Total",records[i].code)!=0){
              printf("Code: %s, Number: %d, Name: %s, Initial: %.2f, Sell: %.2f\n",
                    records[i].code, records[i].number, records[i].name, records[i].initial, records[i].sell);
                    c++;
         }
-        if(strcmp("Total",records[i].code)==0 && strstr(records[i].day,month)){
+        if(strcmp("Total",records[i].code)==0 && strstr(records[i].day,month)){ //print total line
             printf("%s,  %d,  profit, %.2f\n",
             records[i].code, records[i].number,records[i].sell);
             c++;
             printf("\n");
         }
         }
-        if(c==0){
+        if(c==0){ //check if nothing print out
             printf("No information in that month");
         }
     }
     else if (a == 3) {
         printf("Input Year: ");
         char year[4]; // Adjust size for null terminator
-        scanf("%4s", year); 
+        scanf("%4s", year); //input year
         int c=0;
         int l = strlen(year);
         if(l!=4){
-        printf("No information in that year");
+        printf("No information in that year"); //no information in that year if string doesn't equal
         return 0; }
         for (int i = 0; i < recordCount; i++) {
         if (strstr(records[i].day,year) && strcmp("Total",records[i].code)!=0){
@@ -156,7 +155,7 @@ int readstate() {
             printf("\n");
         }
         }
-        if(c==0){
+        if(c==0){ //if nothing print out then no info
             printf("No information in that year");
         }
     }

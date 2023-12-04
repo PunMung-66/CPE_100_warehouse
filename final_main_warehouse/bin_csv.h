@@ -10,8 +10,8 @@ struct Products {
     float sell;
 };
 
-void bin2csv() {
-  const char *binFileName = "Database.bin";
+void bin2csv() { //binary to become csv
+  const char *binFileName = "Database.bin"; 
   const char *csvFileName = "Database.csv";
 
   FILE *binFile = fopen(binFileName, "rb");

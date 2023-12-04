@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-void showBasket() 
+void showBasket() //show the basket
 {
     int count = 0, unit = 0;
     double sum = 0, sell = 0;

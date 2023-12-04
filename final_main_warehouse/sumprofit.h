@@ -3,13 +3,13 @@
 
 double sumprofit = 0;
 
-double netprofit(double profit) {
+double netprofit(double profit) { //netprofit function
     FILE *csvFile;
     FILE *csvFile2;
-    csvFile = fopen("profit.csv", "r");
-    csvFile2 = fopen("temp.csv", "w");
-    if (csvFile == NULL) {
-        sumprofit += profit;
+    csvFile = fopen("profit.csv", "r"); //read profit file
+    csvFile2 = fopen("temp.csv", "w"); //write temp file
+    if (csvFile == NULL) { //if didn't create csvFile
+        sumprofit += profit; 
         fprintf(csvFile2, "%lf\n", profit);
         fclose(csvFile2);
         rename("temp.csv", "profit.csv");
@@ -17,7 +17,7 @@ double netprofit(double profit) {
     }
     char line[100];
     fgets(line, sizeof(line), csvFile);
-    if (line[0] == '\0') {
+    if (line[0] == '\0') { // if create CSV file
         fprintf(csvFile, "%lf\n", profit);
         fclose(csvFile);
         printf("CSV file created successfully.\n");
@@ -28,7 +28,7 @@ double netprofit(double profit) {
     fprintf(csvFile2, "%lf\n", sumprofit);
     fclose(csvFile);
     fclose(csvFile2);
-    remove("profit.csv");
-    rename("temp.csv", "profit.csv");
+    remove("profit.csv"); 
+    rename("temp.csv", "profit.csv"); //swap temp file to profit
     printf("CSV file created successfully.\n");
 }

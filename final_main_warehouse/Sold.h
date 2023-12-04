@@ -55,7 +55,7 @@ int readBasketData(ProductBasket *receipt) {
     return numRecords;
 }
 
-int readProductData(Product *products) {
+int readProductData(Product *products) { //readproduct function
     FILE *file = fopen("Database.csv", "r");
 
     if (file == NULL) {
@@ -95,7 +95,7 @@ int readProductData(Product *products) {
     return numRecords;
 }
 
-void updateProductUnits(Product *products, int numProductRecords, ProductBasket *receipt, int numBasketRecords) {
+void updateProductUnits(Product *products, int numProductRecords, ProductBasket *receipt, int numBasketRecords) { //update product
     for (int i = 0; i < numBasketRecords; i++) {
         for (int j = 0; j < numProductRecords; j++) {
             if (strcmp(receipt[i].code, products[j].code) == 0) {
@@ -106,7 +106,7 @@ void updateProductUnits(Product *products, int numProductRecords, ProductBasket 
     }
 }
 
-void writeProductDataToFile(Product *products, int numProductRecords) {
+void writeProductDataToFile(Product *products, int numProductRecords) { 
     FILE *file = fopen("temp.csv", "w");
 
     if (file == NULL) {

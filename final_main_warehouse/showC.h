@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-int ShowStocks_cashier() {
+int ShowStocks_cashier() { //showstock in cashier
     FILE *file = fopen("Database.csv", "r");
 
     if (file == NULL) 

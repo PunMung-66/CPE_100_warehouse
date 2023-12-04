@@ -7,7 +7,7 @@
 #include "login.h"
 
 void cashier_system()
-{
+{ 
     combine_basket(total);
     showBasket();
     int cash_option = cashier();
@@ -18,31 +18,31 @@ void cashier_system()
         {
             system("cls");
             printf("\n(** Please try again, your option is out of defined. **)\n\n");
-            combine_basket(total);
+            combine_basket(total); //combine the basket
             showBasket();
             cash_option = cashier();
         }
-        if ( cash_option == 1 )
+        if ( cash_option == 1 ) //add option system
         {
             system("cls");
             printf("\n[Add option]\n\n");
             addToBasket_system();
             combine_basket(total);
         }
-        else if ( cash_option == 2)
+        else if ( cash_option == 2) //edit option system
         {
             system("cls");
             printf("\n[Edit option]\n");
             editToBasket_system();
             combine_basket(total);
             }
-        else if ( cash_option == 3)
+        else if ( cash_option == 3) //clear basket system
         {
             system("cls");
             clear_basket();
             combine_basket(total);
             }
-        else if ( cash_option == 4)
+        else if ( cash_option == 4) //save basket system
         {
             system("cls");
             printf("\n[Save & Sold]\n");
@@ -51,7 +51,7 @@ void cashier_system()
             netprofit(total[1]);
             clear_basket();
             }
-        else if ( cash_option == 5){break;}
+        else if ( cash_option == 5){break;} 
         showBasket();
         cash_option = cashier();
     }
@@ -69,7 +69,7 @@ int welcome()
     printf("(2) Warehouse\n");
     printf("(3) Exit() \n\n");
     printf("Choose your option:\n\n");
-    printf("CPE_100:\\Menu> ");
+    printf("CPE_100:\\Menu> "); //option UI
     scanf("%s", option);
     if ((option[0] < '1' || option[0] > '3') || strlen(option) != 1)
         option[0] = '0';
@@ -90,7 +90,7 @@ void welcome_system()
             printf("\n(** Please try again, your option is out of defined. **)\n\n");
             wel_option = welcome();
         }
-        if ( wel_option == 1 )
+        if ( wel_option == 1 ) //go to cashier
         {
             bin2csv();
             system("cls");
@@ -98,7 +98,7 @@ void welcome_system()
             cashier_system();
             csv2bin();
         }
-        else if ( wel_option == 2)
+        else if ( wel_option == 2) //go to warehouse
         {
             bin2csv();
             system("cls");
@@ -107,7 +107,7 @@ void welcome_system()
             menuwarehouse();
             csv2bin();
         }
-        else if ( wel_option == 3){exit(0);}
+        else if ( wel_option == 3){exit(0);} //exit
         wel_option = welcome();
     }
 }
